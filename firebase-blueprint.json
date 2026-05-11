@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Potensi atau nasabah dalam pipeline sales",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Nama nasabah/kontak" },
+        "company": { "type": "string", "description": "Nama instansi/perusahaan" },
+        "status": { 
+          "type": "string", 
+          "enum": ["Prospecting", "Qualification", "Proposal", "Negotiation", "Closed Won", "Closed Lost"],
+          "description": "Tahapan dalam pipeline"
+        },
+        "potentialAmount": { "type": "number", "description": "Nominal potensi (IDR)" },
+        "realizationAmount": { "type": "number", "description": "Nominal realisasi (IDR)" },
+        "salespersonId": { "type": "string", "description": "UID sales yang menangani" },
+        "lastVisitDate": { "type": "string", "format": "date-time", "description": "Tanggal terakhir dikunjungi" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "status", "potentialAmount", "salespersonId"]
+    },
+    "Visit": {
+      "title": "Visit",
+      "description": "Catatan kunjungan harian sales",
+      "type": "object",
+      "properties": {
+        "leadId": { "type": "string", "description": "ID Lead yang dikunjungi" },
+        "salespersonId": { "type": "string", "description": "UID sales" },
+        "date": { "type": "string", "format": "date-time", "description": "Waktu kunjungan" },
+        "notes": { "type": "string", "description": "Hasil kunjungan" },
+        "amountReported": { "type": "number", "description": "Nominal yang dilaporkan saat kunjungan (opsional)" }
+      },
+      "required": ["leadId", "salespersonId", "date", "notes"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Profil pengguna aplikasi",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["sales", "manager"] }
+      },
+      "required": ["name", "email", "role"]
+    }
+  },
+  "firestore": {
+    "leads": {
+      "schema": "Lead",
+      "description": "Koleksi data lead/prospek"
+    },
+    "visits": {
+      "schema": "Visit",
+      "description": "Koleksi log kunjungan"
+    },
+    "users": {
+      "schema": "User",
+      "description": "Koleksi profil pengguna"
+    }
+  }
+}

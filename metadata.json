@@ -1,0 +1,6 @@
+{
+  "name": "SalesFlow Indonesia",
+  "description": "Aplikasi manajemen pipeline sales dengan integrasi Google Sheets untuk pelaporan kunjungan dan dashboard realisasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
